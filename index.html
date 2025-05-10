@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>❄️ TopDevice - Прайс на кондиционеры</title>
+    <style>
+        :root {
+            --ac-blue: #0088cc;
+            --ac-black: #000000;
+            --ac-white: #ffffff;
+            --ac-gray: #f2f2f7;
+            --ac-dark: #1c1c1e;
+        }
+        
+        body {
+            font-family: 'Roboto', 'Segoe UI', Oxygen, Ubuntu, Cantarell, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: var(--ac-gray);
+            color: var(--ac-dark);
+            line-height: 1.6;
+        }
+        
+        header {
+            background: linear-gradient(135deg, var(--ac-blue), #00aaff);
+            color: white;
+            padding: 1.5rem;
+            text-align: center;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+        
+        h1 {
+            margin: 0;
+            font-size: 2rem;
+        }
+        
+        .date {
+            font-size: 0.9rem;
+            opacity: 0.9;
+            margin-top: 0.5rem;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 1rem;
+        }
+        
+        .search-container {
+            position: sticky;
+            top: 0;
+            background-color: white;
+            padding: 1rem;
+            border-radius: 10px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            margin-bottom: 2rem;
+            z-index: 100;
+        }
+        
+        #search {
+            width: 100%;
+            padding: 0.8rem 1rem;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 1rem;
+            outline: none;
+        }
+        
+        #search:focus {
+            border-color: var(--ac-blue);
+            box-shadow: 0 0 0 3px rgba(0,136,204,0.1);
+        }
+        
+        .category {
+            margin-bottom: 2.5rem;
+            background-color: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        
+        .category-header {
+            padding: 1rem 1.5rem;
+            color: white;
+            display: flex;
+            align-items: center;
+            font-weight: bold;
+        }
+        
+        .category-header.ac-7 {
+            background: linear-gradient(135deg, #00aaff, #0088cc);
+        }
+        
+        .category-header.ac-9 {
+            background: linear-gradient(135deg, #00ccaa, #0088cc);
+        }
+        
+        .category-header.ac-12 {
+            background: linear-gradient(135deg, #00ccff, #0066cc);
+        }
+        
+        .category-header.ac-18 {
+            background: linear-gradient(135deg, #0066cc, #0044aa);
+        }
+        
+        .category-header.ac-24 {
+            background: linear-gradient(135deg, #0044aa, #002288);
+        }
+        
+        .category-icon {
+            margin-right: 0.8rem;
+            font-size: 1.5rem;
+        }
+        
+        .product-list {
+            padding: 0;
+            margin: 0;
+            list-style: none;
+        }
+        
+        .product-item {
+            padding: 1rem 1.5rem;
+            border-bottom: 1px solid #eee;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .product-item:last-child {
+            border-bottom: none;
+        }
+        
+        .product-item:hover {
+            background-color: rgba(0,0,0,0.02);
+        }
+        
+        .product-name {
+            flex-grow: 1;
+        }
+        
+        .product-price {
+            font-weight: bold;
+            color: var(--ac-blue);
+            white-space: nowrap;
+            margin-left: 1rem;
+        }
+        
+        .highlight {
+            background-color: #e8f0fe;
+        }
+        
+        .disclaimer {
+            background-color: white;
+            padding: 1.5rem;
+            border-radius: 12px;
+            margin-top: 2rem;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            font-size: 0.9rem;
+        }
+        
+        .disclaimer h3 {
+            margin-top: 0;
+            color: var(--ac-blue);
+        }
+        
+        .contact-info {
+            background-color: var(--ac-dark);
+            color: white;
+            padding: 2rem 1.5rem;
+            margin-top: 3rem;
+            border-radius: 12px;
+        }
+        
+        .contact-info a {
+            color: #8ab4f8;
+            text-decoration: none;
+        }
+        
+        .contact-info a:hover {
+            text-decoration: underline;
+        }
+        
+        footer {
+            text-align: center;
+            padding: 2rem 0;
+            color: #666;
+            font-size: 0.9rem;
+        }
+        
+        @media (max-width: 768px) {
+            .product-item {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            
+            .product-price {
+                margin-left: 0;
+                margin-top: 0.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>❄️ TopDevice - Прайс на кондиционеры</h1>
+        <div class="date">Актуально на 07/03/2025 (наличный расчет)</div>
+    </header>
+    
+    <div class="container">
+        <div class="search-container">
+            <input type="text" id="search" placeholder="Поиск кондиционера (например, Fujimitsu или 07)" aria-label="Поиск товара">
+        </div>
+        
+        <div class="category">
+            <div class="category-header ac-7">
+                <span class="category-icon">7️⃣</span>
+                <h2>Кондиционеры 07 (2.0-2.5 кВт)</h2>
+            </div>
+            <ul class="product-list" id="ac-7">
+                <li class="product-item">
+                    <span class="product-name">Кондиционер обычный Fujimitsu FR-07SBST1 (Компрессор GMCC)</span>
+                    <span class="product-price">15 400 ₽</span>
+                </li>
+                <li class="product-item">
+                    <span class="product-name">Кондиционер обычный Highlife 07CC -chdvo2si (Компрессор GREE)</span>
+                    <span class="product-price">17 300 ₽</span>
+                </li>
+                <li class="product-item">
+                    <span class="product-name">Кондиционер обычный Kraft kf-max07 (Компрессор GMCC)</span>
+                    <span class="product-price">16 900 ₽</span>
+                </li>
+                <li class="product-item">
+                    <span class="product-name">Кондиционер обычный Daichi Da20EVQ1 (компрессор TCL)</span>
+                    <span class="product-price">22 000 ₽</span>
+                </li>
+                <li class="product-item">
+                    <span class="product-name">Кондиционер Centek CT-65RDC07 Инвертор (Компрессор GMCC)</span>
+                    <span class="product-price">24 900 ₽</span>
+                </li>
+            </ul>
+        </div>
+        
+        <div class="category">
+            <div class="category-header ac-9">
+                <span class="category-icon">9️⃣</span>
+                <h2>Кондиционеры 09 (2.5-3.5 кВт)</h2>
+            </div>
+            <ul class="product-list" id="ac-9">
+                <li class="product-item">
+                    <span class="product-name">Кондиционер обычный Fujimitsu FR-09SBST1 (Компрессор GMCC)</span>
+                    <span class="product-price">18 000 ₽</span>
+                </li>
+                <li class="product-item">
+                    <span class="product-name">Кондиционер обычный Centek СТ-65R09 (Компрессор GMCC)</span>
+                    <span class="product-price">21 000 ₽</span>
+                </li>
+                <li class="product-item">
+                    <span class="product-name">Кондиционер Инвертор Fujimitsu FR-09SBIN1 (Компрессор GMCC)</span>
+                    <span class="product-price">24 900 ₽</span>
+                </li>
+                <li class="product-item">
+                    <span class="product-name">Кондиционер инвертор Royal Clima RCI-TWL28HN/IN/RCI-TWL28HN/OUT</span>
+                    <span class="product-price">31 100 ₽</span>
+                </li>
+            </ul>
+        </div>
+        
+        <div class="category">
+            <div class="category-header ac-12">
+                <span class="category-icon">1️⃣2️⃣</span>
+                <h2>Кондиционеры 12 (3.5-4.5 кВт)</h2>
+            </div>
+            <ul class="product-list" id="ac-12">
+                <li class="product-item">
+                    <span class="product-name">Кондиционер обычный Uitima Comfort ECS-12PN</span>
+                    <span class="product-price">25 900 ₽</span>
+                </li>
+                <li class="product-item">
+                    <span class="product-name">Кондиционер обычный RIX I/O-W12MB серии LITE (Компрессор GREE) Завод МВО</span>
+                    <span class="product-price">27 900 ₽</span>
+                </li>
+                <li class="product-item">
+                    <span class="product-name">Кондиционер обычный Newtek 12 nt-65cha12 GMCC</span>
+                    <span class="product-price">29 000 ₽</span>
+                </li>
+                <li class="product-item">
+                    <span class="product-name">Кондиционер инвертор Fujimitsu FR-12SBIN1 (Компрессор GMCC)</span>
+                    <span class="product-price">27 800 ₽</span>
+                </li>
+                <li class="product-item">
+                    <span class="product-name">Кондиционер инвертор Daichi AIR35AVQS1R-1/AIR35FVS1R-1 белый</span>
+                    <span class="product-price">41 000 ₽</span>
+                </li>
+                <li class="product-item">
+                    <span class="product-name">Кондиционер инвертор Kentatsu KSGYK35HZRN1/KSRYK35HZRN1</span>
+                    <span class="product-price">36 500 ₽</span>
+                </li>
+            </ul>
+        </div>
+        
+        <div class="category">
+            <div class="category-header ac-18">
+                <span class="category-icon">1️⃣8️⃣</span>
+                <h2>Кондиционеры 18 (5.0-6.0 кВт)</h2>
+            </div>
+            <ul class="product-list" id="ac-18">
+                <li class="product-item">
+                    <span class="product-name">Кондиционер обычный Fujimitsu FR-018SBST1 (Компрессор GMCC)</span>
+                    <span class="product-price">38 900 ₽</span>
+                </li>
+                <li class="product-item">
+                    <span class="product-name">Кондиционер обычный Highlife 18c-CHDV02sI (компрессор GMCC)</span>
+                    <span class="product-price">45 900 ₽</span>
+                </li>
+                <li class="product-item">
+                    <span class="product-name">Кондиционер Инвертер Fujimitsu FR-18SBIN1 (Компрессор GMCC)</span>
+                    <span class="product-price">44 500 ₽</span>
+                </li>
+                <li class="product-item">
+                    <span class="product-name">Кондиционер Инвертор Centek CT-65RDC18 (Компрессор HIGHLY)</span>
+                    <span class="product-price">51 700 ₽</span>
+                </li>
+            </ul>
+        </div>
+        
+        <div class="category">
+            <div class="category-header ac-24">
+                <span class="category-icon">2️⃣4️⃣</span>
+                <h2>Кондиционеры 24 (7.0-8.0 кВт)</h2>
+            </div>
+            <ul class="product-list" id="ac-24">
+                <li class="product-item">
+                    <span class="product-name">Кондиционер обычный RIX I/O-W24MB (серия LITE) компрессор GREE (завод МВО)</span>
+                    <span class="product-price">53 000 ₽</span>
+                </li>
+                <li class="product-item">
+                    <span class="product-name">Кондиционер Инвертор Fujimitsu FR-24SBIN1 (Компрессор SANYO)</span>
+                    <span class="product-price">55 000 ₽</span>
+                </li>
+            </ul>
+        </div>
+        
+        <div class="disclaimer">
+            <h3>❗️ Важная информация</h3>
+            <p>✅ Цена напрямую зависит от дефицита товара и от курса $</p>
+            <p>✅ Цены указаны с максимальной скидкой и только за наличный расчёт!</p>
+            <p>✅ Цены в кредит или рассрочку узнаем отдельно.</p>
+            <p>✅ В случае отсутствия какой либо позиции в наличии, ожидание после заказа 1-2 дня!</p>
+            <p>✅ Заранее лучше бронировать через WhatsApp</p>
+        </div>
+        
+        <div class="contact-info">
+            <h3>Контакты</h3>
+            <p>📌 Телеграмм: <a href="https://t.me/topdevice777" target="_blank">@topdevice777</a></p>
+            <p>📌 WhatsApp: <a href="https://wa.me/79788930777" target="_blank">+7 978 893 07 77</a></p>
+            <p>📌 Адрес: Красногвардейское ул.Советская 10</p>
+            <p>📌 Отправка по Крыму автобусом или курьерская доставка</p>
+            <p>📌 Ежедневно с 8:00 до 18:00</p>
+        </div>
+    </div>
+    
+    <footer>
+        <p>© 2025 TopDevice. Все права защищены.</p>
+    </footer>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const searchInput = document.getElementById('search');
+            const productItems = document.querySelectorAll('.product-item');
+            
+            searchInput.addEventListener('input', function() {
+                const searchTerm = this.value.toLowerCase();
+                
+                productItems.forEach(item => {
+                    const productName = item.querySelector('.product-name').textContent.toLowerCase();
+                    
+                    if (productName.includes(searchTerm)) {
+                        item.style.display = 'flex';
+                        item.classList.add('highlight');
+                        
+                        // Scroll to the first highlighted item
+                        if (document.querySelectorAll('.highlight').length === 1) {
+                            item.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                        }
+                    } else {
+                        item.style.display = 'none';
+                        item.classList.remove('highlight');
+                    }
+                });
+                
+                // Show all categories even if empty during search
+                document.querySelectorAll('.category').forEach(category => {
+                    const visibleItems = category.querySelectorAll('.product-item[style="display: flex;"]').length;
+                    if (visibleItems === 0 && searchTerm.length > 0) {
+                        category.style.display = 'none';
+                    } else {
+                        category.style.display = 'block';
+                    }
+                });
+            });
+            
+            // Clear highlights when search is cleared
+            searchInput.addEventListener('search', function() {
+                if (this.value === '') {
+                    productItems.forEach(item => {
+                        item.classList.remove('highlight');
+                        item.style.display = 'flex';
+                    });
+                    
+                    document.querySelectorAll('.category').forEach(category => {
+                        category.style.display = 'block';
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
